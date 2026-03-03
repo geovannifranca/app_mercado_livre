@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 
 class MlCard extends StatefulWidget {
   final Product product;
-  const MlCard({super.key, required this.product});
+  final void Function() onPressed;
+  const MlCard({super.key, required this.product, required this.onPressed});
 
   @override
   State<MlCard> createState() => _MlCardState();
@@ -75,7 +76,7 @@ class _MlCardState extends State<MlCard> {
                     style: ButtonStyle(
                       padding: WidgetStateProperty.all(EdgeInsets.zero),
                     ),
-                    onPressed: () {},
+                    onPressed: widget.onPressed,
                     child: Align(
                       alignment: Alignment.bottomRight,
                       child: Text(
