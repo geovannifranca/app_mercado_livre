@@ -10,8 +10,7 @@ class Cep extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Spacer(flex: 2),
-          Flexible(flex: 14, child: Icon(Icons.pin_drop_outlined, size: 20.0)),
+          Icon(Icons.pin_drop_outlined, size: 20.0),
           const SizedBox(width: 8.0),
           Text(
             'Informe o seu Cep',

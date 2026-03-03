@@ -11,7 +11,7 @@ class Product {
     required String id,
     required String name,
     required String image,
-    required double value,
+    double value = 599.99,
     required int installments,
     bool isShippingFree = false,
     String description = 'Disponível em 6 cores',

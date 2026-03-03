@@ -1,8 +1,9 @@
 import 'package:app_mercado_livre/store/home_store.dart';
 import 'package:app_mercado_livre/widgets/cep.widget.dart';
+import 'package:app_mercado_livre/widgets/filter.widget.dart';
+import 'package:app_mercado_livre/widgets/ml_card.widget.dart';
 import 'package:app_mercado_livre/widgets/ml_search_bar.widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -18,20 +19,36 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actionsPadding: EdgeInsets.symmetric(horizontal: 20),
         actions: [
-          Spacer(),
-          Expanded(flex: 10, child: MlSearchBar(homeStore: _homeStore)),
-          Expanded(flex: 2, child: Icon(Icons.shopping_cart_outlined)),
+          Expanded(flex: 12, child: MlSearchBar(homeStore: _homeStore)),
+          Expanded(
+            flex: 2,
+            child: Icon(Icons.shopping_cart_outlined, size: 28),
+          ),
         ],
-        bottom: PreferredSize(preferredSize: Size(0, 40), child: Cep()),
+        bottom: PreferredSize(
+          preferredSize: Size(0, 40),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Cep(),
+          ),
+        ),
         backgroundColor: Color(0xFFFDD835),
       ),
-      body: Observer(
-        builder: (context) {
-          return _homeStore.productSearched != null
-              ? Text(_homeStore.productSearched!.name)
-              : Text('Lista de produto');
-        },
+      body: Column(
+        children: [
+          Filter(),
+          Expanded(
+            child: ListView.separated(
+              itemBuilder: (context, index) {
+                return MlCard(product: _homeStore.products[index]);
+              },
+              separatorBuilder: (context, index) => SizedBox(height: 6),
+              itemCount: _homeStore.products.length,
+            ),
+          ),
+        ],
       ),
     );
   }

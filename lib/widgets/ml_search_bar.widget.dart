@@ -14,6 +14,8 @@ class _MlSearchBarState extends State<MlSearchBar> {
   @override
   Widget build(BuildContext context) {
     return SearchBar(
+      elevation: WidgetStateProperty.all(0),
+      backgroundColor: WidgetStateProperty.all(Colors.white),
       onChanged: (value) => widget._homeStore.search,
       padding: const WidgetStatePropertyAll<EdgeInsets>(
         EdgeInsets.symmetric(horizontal: 12.0),
