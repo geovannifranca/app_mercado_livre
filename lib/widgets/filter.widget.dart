@@ -1,7 +1,22 @@
+import 'package:app_mercado_livre/store/home_store.dart';
 import 'package:flutter/material.dart';
 
-class Filter extends StatelessWidget {
-  const Filter({super.key});
+class Filter extends StatefulWidget {
+  final HomeStore homeStore;
+  const Filter({super.key, required this.homeStore});
+
+  @override
+  State<Filter> createState() => _FilterState();
+}
+
+class _FilterState extends State<Filter> {
+  late Future<void> _loadProductsFuture;
+
+  @override
+  void initState() {
+    _loadProductsFuture = Future.delayed(const Duration(seconds: 6));
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +36,18 @@ class Filter extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text('15 Resultados', style: TextStyle(fontSize: 18.0)),
+          FutureBuilder(
+            future: _loadProductsFuture,
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Text('0 Resultados', style: TextStyle(fontSize: 18.0));
+              }
+              return Text(
+                '${widget.homeStore.products.length} Resultados',
+                style: TextStyle(fontSize: 18.0),
+              );
+            },
+          ),
           Row(
             children: [
               Text(

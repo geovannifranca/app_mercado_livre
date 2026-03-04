@@ -19,6 +19,14 @@ class _HomeScreenState extends State<HomeScreen> {
   final HomeStore _homeStore = HomeStore();
   final ShoppingCartStore _shoppingCartStore = ShoppingCartStore();
 
+  late Future<void> _loadProductsFuture;
+
+  @override
+  void initState() {
+    _loadProductsFuture = Future.delayed(const Duration(seconds: 6));
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,32 +74,48 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: Column(
         children: [
-          Filter(),
+          Filter(homeStore: _homeStore),
           Expanded(
-            child: ListView.separated(
-              itemBuilder: (context, index) {
-                return MlCard(
-                  product: _homeStore.products[index],
-                  onPressed: () {
-                    bool added = _shoppingCartStore.addShoppingCart(
+            child: FutureBuilder(
+              future: _loadProductsFuture,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(
+                    child: CircularProgressIndicator(color: Color(0xFFFDD835)),
+                  );
+                }
+                return ListView.separated(
+                  itemBuilder: (context, index) {
+                    return MlCard(
                       product: _homeStore.products[index],
-                    );
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(
-                          added
-                              ? 'Produto adicionado!'
-                              : 'Produto já está no carrinho!',
-                        ),
-                        backgroundColor: added ? Colors.green : Colors.red,
-                        duration: const Duration(seconds: 2),
-                      ),
+                      onPressed: () {
+                        bool added = _shoppingCartStore.addShoppingCart(
+                          product: _homeStore.products[index],
+                        );
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            closeIconColor: Colors.black,
+                            showCloseIcon: true,
+                            content: Text(
+                              added
+                                  ? 'Produto adicionado!'
+                                  : 'Produto já está no carrinho!',
+                              style: const TextStyle(
+                                fontSize: 20,
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            backgroundColor: added ? Colors.yellow : Colors.red,
+                          ),
+                        );
+                      },
                     );
                   },
+                  separatorBuilder: (context, index) => SizedBox(height: 6),
+                  itemCount: _homeStore.products.length,
                 );
               },
-              separatorBuilder: (context, index) => SizedBox(height: 6),
-              itemCount: _homeStore.products.length,
             ),
           ),
         ],
