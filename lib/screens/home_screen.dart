@@ -4,6 +4,7 @@ import 'package:app_mercado_livre/store/shopping_cart_store.dart';
 import 'package:app_mercado_livre/widgets/cep.widget.dart';
 import 'package:app_mercado_livre/widgets/filter.widget.dart';
 import 'package:app_mercado_livre/widgets/ml_card.widget.dart';
+
 import 'package:app_mercado_livre/widgets/ml_search_bar.widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -110,6 +111,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         );
                       },
+                      homeStore: _homeStore,
                     );
                   },
                   separatorBuilder: (context, index) => SizedBox(height: 6),

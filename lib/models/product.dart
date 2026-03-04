@@ -1,3 +1,7 @@
+import 'dart:ffi';
+
+import 'package:flutter/foundation.dart';
+
 class Product {
   final String _id;
   final String _name;
@@ -6,7 +10,7 @@ class Product {
   final int _installments;
   final bool _isShippingFree;
   final String _description;
-  final double _evaluation;
+  final int _evaluation;
   Product({
     required String id,
     required String name,
@@ -15,7 +19,7 @@ class Product {
     required int installments,
     bool isShippingFree = false,
     String description = 'Disponível em 6 cores',
-    required double evaluation,
+    int evaluation = 5,
   }) : _id = id,
        _name = name,
        _image = image,
@@ -32,5 +36,27 @@ class Product {
   int get installments => _installments;
   bool get isShippingFree => _isShippingFree;
   String get description => _description;
-  double get evaluation => _evaluation;
+  int get evaluation => _evaluation;
+
+  Product copyWith({
+    String? id,
+    String? name,
+    String? image,
+    double? value,
+    int? installments,
+    bool? isShippingFree,
+    String? description,
+    int? evaluation,
+  }) {
+    return Product(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      image: image ?? this.image,
+      value: value ?? this.value,
+      installments: installments ?? this.installments,
+      isShippingFree: isShippingFree ?? this.isShippingFree,
+      description: description ?? this.description,
+      evaluation: evaluation ?? this.evaluation,
+    );
+  }
 }

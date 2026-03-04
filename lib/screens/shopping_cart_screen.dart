@@ -28,7 +28,7 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
           : ListView.separated(
               itemBuilder: (context, index) {
                 return Text(
-                  '$index - ${widget.shoppingCartStore.shoppingCart[index].name.toString()} - ${widget.shoppingCartStore.shoppingCart[index].value * int.parse(widget.shoppingCartStore.shoppingCart[index].id)}',
+                  '$index - ${widget.shoppingCartStore.shoppingCart[index].name.toString()} - ${widget.shoppingCartStore.shoppingCart[index].value * int.parse(widget.shoppingCartStore.shoppingCart[index].id)} ${widget.shoppingCartStore.shoppingCart[index].evaluation}',
                 );
               },
               separatorBuilder: (context, index) => SizedBox(height: 5.0),

@@ -1,10 +1,18 @@
 import 'package:app_mercado_livre/models/product.dart';
+import 'package:app_mercado_livre/store/home_store.dart';
+import 'package:app_mercado_livre/widgets/ml_rating.dart';
 import 'package:flutter/material.dart';
 
 class MlCard extends StatefulWidget {
   final Product product;
+  final HomeStore homeStore;
   final void Function() onPressed;
-  const MlCard({super.key, required this.product, required this.onPressed});
+  const MlCard({
+    super.key,
+    required this.product,
+    required this.onPressed,
+    required this.homeStore,
+  });
 
   @override
   State<MlCard> createState() => _MlCardState();
@@ -63,14 +71,14 @@ class _MlCardState extends State<MlCard> {
                         )
                       : SizedBox(),
                   Text('Disponível em 6 cores'),
-                  Row(
-                    children: [
-                      Icon(Icons.star, color: Colors.blue, size: 20),
-                      Icon(Icons.star, color: Colors.blue, size: 20),
-                      Icon(Icons.star, color: Colors.blue, size: 20),
-                      Icon(Icons.star, color: Colors.blue, size: 20),
-                      Icon(Icons.star_outline, color: Colors.blue, size: 20),
-                    ],
+                  MlRating(
+                    product: widget.product,
+                    onRatingChanged: (value) {
+                      widget.homeStore.updateProductEvaluation(
+                        widget.product,
+                        value,
+                      );
+                    },
                   ),
                   TextButton(
                     style: ButtonStyle(
