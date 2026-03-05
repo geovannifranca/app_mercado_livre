@@ -6,6 +6,7 @@ Este repositório é o desafio final do módulo 5 (Gerenciamento de Estado) da G
 <img width="589,5" height="1.278" alt="pagina-3" src="https://github.com/user-attachments/assets/b5718c8b-c0e9-42dc-899a-1784d8e4b83d" />
 <img width="589,5" height="1.278" alt="pagina-4" src="https://github.com/user-attachments/assets/f095ec72-2297-4755-bc24-a6b1750f8594" />
 <img width="589,5" height="1.278" alt="pagina-6" src="https://github.com/user-attachments/assets/ec1263b5-b192-40d1-aa7f-dd4720421425" />
+<img width="1179" height="2556" alt="pagina-4" src="https://github.com/user-attachments/assets/87544178-6c11-42b5-b838-1969747180bf" />
 
 ## Funcionalidades
 
