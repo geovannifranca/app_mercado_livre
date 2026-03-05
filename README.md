@@ -2,10 +2,10 @@
 
 Este repositório é o desafio final do módulo 5 (Gerenciamento de Estado) da Growdev, contém um aplicativo Flutter que simula algumas funcionalidades de um e-commerce, inspirado no Mercado Livre. O projeto demonstra o uso de Flutter para desenvolvimento mobile, gerenciamento de estado com MobX e injeção de dependência com GetIt.
 
-<img width="589,5" height="1278" alt="pagina-1" src="https://github.com/user-attachments/assets/3b95b54a-5823-4fa4-8099-186b8f02437b" />
-<img width="589,5" height="1278" alt="pagina-3" src="https://github.com/user-attachments/assets/b5718c8b-c0e9-42dc-899a-1784d8e4b83d" />
-<img width="589,5" height="1278" alt="pagina-4" src="https://github.com/user-attachments/assets/f095ec72-2297-4755-bc24-a6b1750f8594" />
-<img width="589,5" height="1278" alt="pagina-6" src="https://github.com/user-attachments/assets/ec1263b5-b192-40d1-aa7f-dd4720421425" />
+<img width="294" height="639" alt="pagina-1" src="https://github.com/user-attachments/assets/3b95b54a-5823-4fa4-8099-186b8f02437b" />
+<img width="294" height="639" alt="pagina-3" src="https://github.com/user-attachments/assets/b5718c8b-c0e9-42dc-899a-1784d8e4b83d" />
+<img width="294" height="639" alt="pagina-4" src="https://github.com/user-attachments/assets/f095ec72-2297-4755-bc24-a6b1750f8594" />
+<img width="294" height="639" alt="pagina-6" src="https://github.com/user-attachments/assets/ec1263b5-b192-40d1-aa7f-dd4720421425" />
 
 
 ## Funcionalidades
