@@ -19,4 +19,12 @@ abstract class ShoppingCartStoreBase with Store {
       return true;
     }
   }
+
+  @action
+  void updateProductInCart(Product oldProduct, Product newProduct) {
+    final index = shoppingCart.indexOf(oldProduct);
+    if (index != -1) {
+      shoppingCart[index] = newProduct;
+    }
+  }
 }

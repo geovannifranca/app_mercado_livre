@@ -1,15 +1,17 @@
 import 'package:app_mercado_livre/store/home_store.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 
 class Filter extends StatefulWidget {
-  final HomeStore homeStore;
-  const Filter({super.key, required this.homeStore});
+  const Filter({super.key});
 
   @override
   State<Filter> createState() => _FilterState();
 }
 
 class _FilterState extends State<Filter> {
+  final _homeStore = GetIt.I.get<HomeStore>();
+
   late Future<void> _loadProductsFuture;
 
   @override
@@ -43,7 +45,7 @@ class _FilterState extends State<Filter> {
                 return Text('0 Resultados', style: TextStyle(fontSize: 18.0));
               }
               return Text(
-                '${widget.homeStore.products.length} Resultados',
+                '${_homeStore.products.length} Resultados',
                 style: TextStyle(fontSize: 18.0),
               );
             },

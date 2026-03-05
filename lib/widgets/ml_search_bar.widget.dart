@@ -1,10 +1,7 @@
-import 'package:app_mercado_livre/store/home_store.dart';
 import 'package:flutter/material.dart';
 
 class MlSearchBar extends StatefulWidget {
-  final HomeStore _homeStore;
-  const MlSearchBar({super.key, required HomeStore homeStore})
-    : _homeStore = homeStore;
+  const MlSearchBar({super.key});
 
   @override
   State<MlSearchBar> createState() => _MlSearchBarState();
@@ -16,7 +13,6 @@ class _MlSearchBarState extends State<MlSearchBar> {
     return SearchBar(
       elevation: WidgetStateProperty.all(0),
       backgroundColor: WidgetStateProperty.all(Colors.white),
-      onChanged: (value) => widget._homeStore.search,
       padding: const WidgetStatePropertyAll<EdgeInsets>(
         EdgeInsets.symmetric(horizontal: 12.0),
       ),

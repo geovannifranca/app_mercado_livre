@@ -27,36 +27,18 @@ mixin _$HomeStore on HomeStoreBase, Store {
     });
   }
 
-  late final _$productSearchedAtom = Atom(
-    name: 'HomeStoreBase.productSearched',
-    context: context,
-  );
-
-  @override
-  Product? get productSearched {
-    _$productSearchedAtom.reportRead();
-    return super.productSearched;
-  }
-
-  @override
-  set productSearched(Product? value) {
-    _$productSearchedAtom.reportWrite(value, super.productSearched, () {
-      super.productSearched = value;
-    });
-  }
-
   late final _$HomeStoreBaseActionController = ActionController(
     name: 'HomeStoreBase',
     context: context,
   );
 
   @override
-  void search(String? value) {
+  void updateProductEvaluation(Product product, double newRating) {
     final _$actionInfo = _$HomeStoreBaseActionController.startAction(
-      name: 'HomeStoreBase.search',
+      name: 'HomeStoreBase.updateProductEvaluation',
     );
     try {
-      return super.search(value);
+      return super.updateProductEvaluation(product, newRating);
     } finally {
       _$HomeStoreBaseActionController.endAction(_$actionInfo);
     }
@@ -65,8 +47,7 @@ mixin _$HomeStore on HomeStoreBase, Store {
   @override
   String toString() {
     return '''
-products: ${products},
-productSearched: ${productSearched}
+products: ${products}
     ''';
   }
 }

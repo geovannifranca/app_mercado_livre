@@ -1,4 +1,6 @@
 import 'package:app_mercado_livre/models/product.dart';
+import 'package:app_mercado_livre/store/shopping_cart_store.dart';
+import 'package:get_it/get_it.dart';
 import 'package:mobx/mobx.dart';
 part 'home_store.g.dart';
 
@@ -101,29 +103,16 @@ abstract class HomeStoreBase with Store {
     ),
   ].asObservable();
 
-  @observable
-  Product? productSearched;
-
   @action
-  void search(String? value) {
-    if (value!.isEmpty) {
-      productSearched = null;
-    } else {
-      try {
-        productSearched = products.firstWhere(
-          (element) => element.name.toLowerCase().contains(value.toLowerCase()),
-        );
-      } catch (e) {
-        productSearched = null;
-      }
-    }
-  }
-
   void updateProductEvaluation(Product product, double newRating) {
     final index = products.indexOf(product);
 
     if (index != -1) {
-      products[index] = product.copyWith(evaluation: newRating.toInt());
+      final updatedProduct = product.copyWith(evaluation: newRating.toInt());
+      products[index] = updatedProduct;
+
+      final cartStore = GetIt.I.get<ShoppingCartStore>();
+      cartStore.updateProductInCart(product, updatedProduct);
     }
   }
 }

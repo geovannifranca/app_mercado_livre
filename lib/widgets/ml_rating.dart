@@ -22,7 +22,7 @@ class _MlRatingState extends State<MlRating> {
   Widget build(BuildContext context) {
     return RatingBar.builder(
       itemSize: 18,
-      initialRating: 0,
+      initialRating: double.parse('${widget.product.evaluation}'),
       direction: Axis.horizontal,
       itemCount: 5,
       itemBuilder: (context, index) {

@@ -2,23 +2,20 @@ import 'package:app_mercado_livre/models/product.dart';
 import 'package:app_mercado_livre/store/home_store.dart';
 import 'package:app_mercado_livre/widgets/ml_rating.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 
 class MlCard extends StatefulWidget {
   final Product product;
-  final HomeStore homeStore;
   final void Function() onPressed;
-  const MlCard({
-    super.key,
-    required this.product,
-    required this.onPressed,
-    required this.homeStore,
-  });
+  const MlCard({super.key, required this.product, required this.onPressed});
 
   @override
   State<MlCard> createState() => _MlCardState();
 }
 
 class _MlCardState extends State<MlCard> {
+  final _homeStore = GetIt.I.get<HomeStore>();
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -32,7 +29,10 @@ class _MlCardState extends State<MlCard> {
               height: 184,
               width: 142,
               decoration: BoxDecoration(color: Colors.grey[300]),
-              child: Image.asset(widget.product.image),
+              child: Image.asset(
+                key: Key("productImage"),
+                widget.product.image,
+              ),
             ),
             SizedBox(width: 8.0),
             Expanded(
@@ -74,13 +74,11 @@ class _MlCardState extends State<MlCard> {
                   MlRating(
                     product: widget.product,
                     onRatingChanged: (value) {
-                      widget.homeStore.updateProductEvaluation(
-                        widget.product,
-                        value,
-                      );
+                      _homeStore.updateProductEvaluation(widget.product, value);
                     },
                   ),
                   TextButton(
+                    key: Key("addProductToCart"),
                     style: ButtonStyle(
                       padding: WidgetStateProperty.all(EdgeInsets.zero),
                     ),

@@ -45,6 +45,18 @@ mixin _$ShoppingCartStore on ShoppingCartStoreBase, Store {
   }
 
   @override
+  void updateProductInCart(Product oldProduct, Product newProduct) {
+    final _$actionInfo = _$ShoppingCartStoreBaseActionController.startAction(
+      name: 'ShoppingCartStoreBase.updateProductInCart',
+    );
+    try {
+      return super.updateProductInCart(oldProduct, newProduct);
+    } finally {
+      _$ShoppingCartStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 shoppingCart: ${shoppingCart}

@@ -21,7 +21,7 @@ class Cep extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 8.0),
-          const Icon(Icons.arrow_forward_ios_rounded, size: 20.0),
+          const Icon(Icons.arrow_forward_ios, size: 20.0),
         ],
       ),
     );

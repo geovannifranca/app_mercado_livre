@@ -4,10 +4,10 @@ import 'package:app_mercado_livre/store/shopping_cart_store.dart';
 import 'package:app_mercado_livre/widgets/cep.widget.dart';
 import 'package:app_mercado_livre/widgets/filter.widget.dart';
 import 'package:app_mercado_livre/widgets/ml_card.widget.dart';
-
 import 'package:app_mercado_livre/widgets/ml_search_bar.widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:get_it/get_it.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -17,8 +17,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final HomeStore _homeStore = HomeStore();
-  final ShoppingCartStore _shoppingCartStore = ShoppingCartStore();
+  final _homeStore = GetIt.I.get<HomeStore>();
+  final _shoppingCartStore = GetIt.I.get<ShoppingCartStore>();
 
   late Future<void> _loadProductsFuture;
 
@@ -34,7 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         actionsPadding: EdgeInsets.only(right: 20, left: 20),
         actions: [
-          Expanded(flex: 12, child: MlSearchBar(homeStore: _homeStore)),
+          Expanded(flex: 12, child: MlSearchBar(key: Key("inputSearch"))),
           Expanded(
             flex: 2,
             child: Center(
@@ -54,9 +54,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   onPressed: () => Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => ShoppingCartScreen(
-                        shoppingCartStore: _shoppingCartStore,
-                      ),
+                      builder: (context) => ShoppingCartScreen(),
                     ),
                   ),
                 ),
@@ -75,7 +73,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: Column(
         children: [
-          Filter(homeStore: _homeStore),
+          Filter(),
           Expanded(
             child: FutureBuilder(
               future: _loadProductsFuture,
@@ -88,6 +86,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 return ListView.separated(
                   itemBuilder: (context, index) {
                     return MlCard(
+                      key: Key("productItem"),
                       product: _homeStore.products[index],
                       onPressed: () {
                         bool added = _shoppingCartStore.addShoppingCart(
@@ -111,7 +110,6 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         );
                       },
-                      homeStore: _homeStore,
                     );
                   },
                   separatorBuilder: (context, index) => SizedBox(height: 6),

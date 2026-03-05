@@ -1,7 +1,3 @@
-import 'dart:ffi';
-
-import 'package:flutter/foundation.dart';
-
 class Product {
   final String _id;
   final String _name;
@@ -19,7 +15,7 @@ class Product {
     required int installments,
     bool isShippingFree = false,
     String description = 'Disponível em 6 cores',
-    int evaluation = 5,
+    int evaluation = 0,
   }) : _id = id,
        _name = name,
        _image = image,
